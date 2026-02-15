@@ -1,5 +1,5 @@
-<!--
-GoLive AI — Site institucional (estático) para GitHub Pages
+﻿<!--
+GoLive AI — Site institucional (estÃ¡tico) para GitHub Pages
 Stack: HTML + Tailwind (CDN)
 Como usar:
 1) Salve este arquivo como "index.html"
@@ -15,7 +15,7 @@ Como usar:
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GoLive AI | Consultoria em Inteligência Artificial</title>
+    <title>Consultoria em Inteligência Artificial</title>
     <meta
       name="description"
       content="A GoLive AI integra Inteligência Artificial aos processos reais das empresas para automatizar, analisar dados, realizar pesquisas estratégicas e apoiar decisões. Transformando inteligência em resultado."
@@ -23,15 +23,14 @@ Como usar:
     <meta name="theme-color" content="#0b1220" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="GoLive AI | Transformando inteligência em resultado" />
-    <meta
-      property="og:description"
-      content="Consultoria estratégica e implementação de IA aplicada a negócios: automação, análises, pesquisa e tomada de decisão."
+    <meta property="og:title"
+          content="GoLive AI | Transformando inteligência em resultado" />
+    <meta property="og:description"
+          content="Consultoria estratégica e implementação de IA aplicada a negócios: automação, análises, pesquisa e tomada de decisão."
     />
     <meta property="og:type" content="website" />
 
-    <!-- Favicon (opcional) -->
-    <!-- <link rel="icon" href="/favicon.ico" /> -->
+    <link rel="icon" href="img/logo.png" type="image/png" />
 
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -53,52 +52,115 @@ Como usar:
     </script>
 
     <style>
-      /* Pequenos ajustes para manter aparência premium */
       .glass {
-        background: rgba(17, 26, 46, 0.55);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(10px);
+        background: rgba(17, 26, 46, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(16px);
       }
-      .grid-glow {
+      /* Fundo moderno: mesh + grid + orbs */
+      .bg-modern {
+        background-color: #050810;
         background-image:
-          radial-gradient(800px circle at 20% 20%, rgba(124, 58, 237, 0.20), transparent 45%),
-          radial-gradient(700px circle at 80% 30%, rgba(59, 130, 246, 0.18), transparent 40%),
-          radial-gradient(700px circle at 60% 80%, rgba(34, 211, 238, 0.12), transparent 45%),
-          linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px),
-          linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px);
-        background-size: auto, auto, auto, 42px 42px, 42px 42px;
-        background-position: center, center, center, center, center;
+          radial-gradient(ellipse 120% 80% at 50% -20%, rgba(88, 28, 135, 0.35), transparent 50%),
+          radial-gradient(ellipse 80% 60% at 90% 40%, rgba(30, 64, 175, 0.25), transparent 45%),
+          radial-gradient(ellipse 70% 50% at 10% 70%, rgba(6, 182, 212, 0.2), transparent 45%),
+          linear-gradient(180deg, transparent 0%, rgba(5, 8, 16, 0.6) 100%);
+        position: relative;
+        overflow-x: hidden;
+      }
+      .bg-modern::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
+        -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
+        pointer-events: none;
+      }
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.4;
+        pointer-events: none;
+      }
+      .orb-1 { width: 400px; height: 400px; background: rgba(124, 58, 237, 0.5); top: -100px; left: -100px; animation: orb-float 20s ease-in-out infinite; }
+      .orb-2 { width: 350px; height: 350px; background: rgba(34, 211, 238, 0.35); top: 40%; right: -80px; animation: orb-float 25s ease-in-out infinite reverse; }
+      .orb-3 { width: 300px; height: 300px; background: rgba(59, 130, 246, 0.4); bottom: -50px; left: 30%; animation: orb-float 22s ease-in-out infinite 3s; }
+      @keyframes orb-float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, -20px) scale(1.05); }
+        66% { transform: translate(-20px, 15px) scale(0.95); }
       }
       .btn-primary {
         background: linear-gradient(90deg, rgba(124,58,237,1) 0%, rgba(59,130,246,1) 55%, rgba(34,211,238,1) 100%);
+        transition: transform 0.2s, box-shadow 0.2s;
       }
       .btn-primary:hover {
-        filter: brightness(1.05);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35);
       }
       html { scroll-behavior: smooth; }
+
+      /* Efeito "construção" ao rolar: elemento surge como se estivesse sendo montado */
+      .build {
+        opacity: 0;
+        transform: translateY(32px) scale(0.97);
+        clip-path: inset(0 0 100% 0);
+        transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                    clip-path 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .build.built {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        clip-path: inset(0 0 0 0);
+      }
+      .build-delay-1 { transition-delay: 0.1s; }
+      .build-delay-2 { transition-delay: 0.2s; }
+      .build-delay-3 { transition-delay: 0.3s; }
+      .build-delay-4 { transition-delay: 0.4s; }
+      .build-delay-5 { transition-delay: 0.5s; }
+      .build-delay-6 { transition-delay: 0.6s; }
+      /* .reveal: conteúdo surge ao rolar (opacity + translateY), transição mais longa */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+      .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+      .icon-wrap { transition: transform 0.3s ease; }
+      .card-hover:hover .icon-wrap { transform: scale(1.1); }
     </style>
   </head>
 
-  <body class="bg-base-900 text-slate-100 selection:bg-cyan-300/30 selection:text-slate-50">
+  <body class="bg-modern text-slate-100 selection:bg-cyan-300/30 selection:text-slate-50 min-h-screen relative">
+    <div class="relative z-10">
     <!-- Top Bar -->
     <header class="sticky top-0 z-50 border-b border-white/10 bg-base-900/80 backdrop-blur">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <a href="#top" class="flex items-center gap-2">
-          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10">
-            <span class="text-sm font-semibold tracking-wide">AI</span>
-          </span>
+        <a href="#top" class="flex items-center gap-3">
+          <img src="img/logo.png" alt="GoLive AI" class="h-9 w-auto object-contain" />
           <div class="leading-tight">
-            <div class="text-sm font-semibold">GoLive AI</div>
-            <div class="text-xs text-slate-300">Transformando inteligência em resultado</div>
+            <div class="text-xs text-slate-300">IA aplicada ao seu negócio</div>
           </div>
         </a>
 
         <nav class="hidden items-center gap-6 text-sm text-slate-200 md:flex">
-          <a class="hover:text-white" href="#sobre">Sobre</a>
-          <a class="hover:text-white" href="#como-fazemos">Como fazemos</a>
-          <a class="hover:text-white" href="#solucoes">Soluções</a>
-          <a class="hover:text-white" href="#cases">Cases</a>
-          <a class="hover:text-white" href="#contato">Contato</a>
+          <a class="transition-colors hover:text-white" href="#sobre">Sobre</a>
+          <a class="transition-colors hover:text-white" href="#como-fazemos">Como fazemos</a>
+          <a class="transition-colors hover:text-white" href="#solucoes">Soluções</a>
+          <a class="transition-colors hover:text-white" href="#cases">Cases</a>
+          <a class="transition-colors hover:text-white" href="#contato">Contato</a>
         </nav>
 
         <div class="flex items-center gap-2">
@@ -135,110 +197,31 @@ Como usar:
       </div>
     </header>
 
-    <!-- Hero -->
-    <main id="top" class="grid-glow">
-      <section class="mx-auto max-w-6xl px-4 py-16 md:py-24">
-        <div class="grid items-center gap-10 md:grid-cols-2">
-          <div>
-            <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-200">
-              <span class="h-2 w-2 rounded-full bg-cyan-300"></span>
-              Consultoria estratégica + implementação
-            </div>
+    <!-- Orbs de fundo (atrás do conteúdo) -->
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
 
-            <h1 class="mt-5 text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-              GoLive AI
-              <span class="block bg-gradient-to-r from-violet-300 via-sky-300 to-cyan-200 bg-clip-text text-transparent">
-                Transformando inteligência em resultado
-              </span>
-            </h1>
-
-            <p class="mt-5 max-w-xl text-base leading-relaxed text-slate-200">
-              Integramos Inteligência Artificial aos processos reais das empresas para
-              <span class="text-slate-50 font-medium">automatizar</span>,
-              <span class="text-slate-50 font-medium">analisar</span>,
-              <span class="text-slate-50 font-medium">pesquisar</span>
-              e apoiar decisões estratégicas com clareza e eficiência.
-            </p>
-
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href="#contato" class="btn-primary inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-900">
-                Agendar diagnóstico
-              </a>
-              <a href="#cases" class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold hover:bg-white/10">
-                Ver aplicações práticas
-              </a>
-            </div>
-
-            <div class="mt-8 grid grid-cols-3 gap-4 text-sm text-slate-200">
-              <div class="glass rounded-2xl p-4">
-                <div class="text-slate-50 font-semibold">Automação</div>
-                <div class="mt-1 text-xs text-slate-300">Menos esforço manual</div>
-              </div>
-              <div class="glass rounded-2xl p-4">
-                <div class="text-slate-50 font-semibold">Análises</div>
-                <div class="mt-1 text-xs text-slate-300">Dados → decisão</div>
-              </div>
-              <div class="glass rounded-2xl p-4">
-                <div class="text-slate-50 font-semibold">Go Live</div>
-                <div class="mt-1 text-xs text-slate-300">Em produção, de verdade</div>
-              </div>
-            </div>
+    <!-- Hero: logo grande central -->
+    <main id="top" class="relative">
+      <section class="min-h-[85vh] flex flex-col items-center justify-center px-4 py-20 md:py-28">
+        <div class="flex flex-col items-center text-center max-w-2xl mx-auto" id="hero-content">
+          <div class="build build-delay-1">
+            <img src="img/logo.png" alt="GoLive AI" class="w-full max-w-[560px] md:max-w-[720px] h-auto mx-auto drop-shadow-2xl" />
           </div>
-
-          <div class="glass rounded-3xl p-6 md:p-8">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <div class="text-sm font-semibold text-slate-50">Diagnóstico Inteligente</div>
-                <div class="mt-1 text-xs text-slate-300">Mapeamento prático + oportunidades reais</div>
-              </div>
-              <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10">Método GoLive</span>
-            </div>
-
-            <div class="mt-6 space-y-3 text-sm text-slate-200">
-              <div class="flex gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-violet-300"></span>
-                <p><span class="font-semibold text-slate-50">Processos</span> — onde o tempo é perdido e onde a operação trava.</p>
-              </div>
-              <div class="flex gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-sky-300"></span>
-                <p><span class="font-semibold text-slate-50">Dados</span> — transformar informação em insights e recomendações.</p>
-              </div>
-              <div class="flex gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-cyan-200"></span>
-                <p><span class="font-semibold text-slate-50">Estratégia</span> — pesquisa, cenários e decisões mais seguras.</p>
-              </div>
-              <div class="flex gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-emerald-200"></span>
-                <p><span class="font-semibold text-slate-50">Implementação</span> — integrações e soluções em produção.</p>
-              </div>
-            </div>
-
-            <div class="mt-7 rounded-2xl border border-white/10 bg-base-800 p-4">
-              <div class="text-xs font-semibold uppercase tracking-wider text-slate-300">Entregáveis típicos</div>
-              <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-200">
-                <li>Mapa de processos + gargalos</li>
-                <li>Roadmap de IA aplicada</li>
-                <li>Propostas de melhoria com impacto estimado</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- “Problema do Mercado” -->
-      <section class="mx-auto max-w-6xl px-4 pb-16 md:pb-24">
-        <div class="grid gap-6 md:grid-cols-3">
-          <div class="glass rounded-3xl p-6">
-            <div class="text-sm font-semibold text-slate-50">Processos manuais</div>
-            <p class="mt-2 text-sm text-slate-200">Rotinas repetitivas consomem horas e aumentam erros.</p>
-          </div>
-          <div class="glass rounded-3xl p-6">
-            <div class="text-sm font-semibold text-slate-50">Retrabalho</div>
-            <p class="mt-2 text-sm text-slate-200">Informações duplicadas, conferências constantes e dependência de pessoas-chave.</p>
-          </div>
-          <div class="glass rounded-3xl p-6">
-            <div class="text-sm font-semibold text-slate-50">Decisão lenta</div>
-            <p class="mt-2 text-sm text-slate-200">Dados existem, mas não viram insights práticos — e a estratégia fica no “achismo”.</p>
+          <p style="line-height: 1.3;" class="build build-delay-2 mt-8 text-3xl md:text-5xl text-slate-300 font-bold tracking-tight">
+            Inteligência em resultado
+          </p>
+          <p class="build build-delay-3 mt-5 text-slate-400 text-xl md:text-2xl max-w-2xl leading-relaxed">
+            IA integrada aos seus processos: automação, análise e decisão com método.
+          </p>
+          <div class="build build-delay-4 mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#contato" class="btn-primary inline-flex items-center justify-center rounded-xl px-8 py-4 text-base md:text-lg font-semibold text-slate-900">
+              Agendar diagnóstico
+            </a>
+            <a href="#solucoes" class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-base md:text-lg font-semibold transition-all hover:bg-white/10 hover:border-white/25">
+              Ver soluções
+            </a>
           </div>
         </div>
       </section>
@@ -247,35 +230,34 @@ Como usar:
     <!-- Sobre -->
     <section id="sobre" class="mx-auto max-w-6xl px-4 py-16">
       <div class="grid gap-8 md:grid-cols-2">
-        <div>
-          <h2 class="text-2xl font-semibold tracking-tight">Quem é a GoLive AI</h2>
-          <p class="mt-4 text-slate-200 leading-relaxed">
-            A GoLive AI é uma consultoria especializada em <span class="text-slate-50 font-medium">analisar negócios, processos e dados</span>
-            e integrar Inteligência Artificial à operação real das empresas.
-          </p>
-          <p class="mt-3 text-slate-200 leading-relaxed">
-            Não criamos modelos de IA. Utilizamos as melhores IAs do mercado e entregamos
-            <span class="text-slate-50 font-medium">soluções integradas</span> — com método, governança e foco em resultado.
+        <div class="reveal">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/20 text-violet-300">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>
+          <h2 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">Quem é a GoLive AI</h2>
+          <p class="mt-4 text-slate-200 leading-relaxed text-lg md:text-xl">
+            Consultoria que <strong class="text-slate-50 text-xl">analisa negócios, processos e dados</strong> e integra IA à operação real. Não criamos modelos — usamos as melhores IAs do mercado e entregamos <strong class="text-slate-50 text-xl">soluções integradas</strong> com método e governança.
           </p>
         </div>
 
-        <div class="glass rounded-3xl p-6">
-          <div class="text-sm font-semibold text-slate-50">Nossa visão</div>
-          <p class="mt-3 text-sm text-slate-200 leading-relaxed">
-            Acreditamos que a IA deve ir além da automação: ela deve <span class="text-slate-50 font-medium">pensar junto com o negócio</span>,
-            analisando dados, realizando pesquisas estratégicas, organizando informação complexa e apoiando decisões com clareza.
+        <div class="glass card-hover reveal rounded-3xl p-6">
+          <div class="flex items-center gap-2 text-sm font-semibold text-slate-50">
+            <svg class="h-5 w-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            Visão
+          </div>
+          <p class="mt-3 text-base md:text-lg text-slate-200 leading-relaxed">
+            IA que <strong class="text-slate-50">pensa com o negócio</strong>: análise de dados, pesquisa estratégica e apoio à decisão.
           </p>
-
-          <div class="mt-5 text-sm font-semibold text-slate-50">Nosso propósito</div>
-          <p class="mt-3 text-sm text-slate-200 leading-relaxed">
-            Colocar a Inteligência Artificial para <span class="text-slate-50 font-medium">pensar, analisar e operar</span> dentro das empresas,
-            transformando informação em decisão e decisão em resultado.
+          <div class="mt-5 flex items-center gap-2 text-base font-semibold text-slate-50">
+            <svg class="h-5 w-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Propósito
+          </div>
+          <p class="mt-3 text-base md:text-lg text-slate-200 leading-relaxed">
+            Colocar a IA para <strong class="text-slate-50">pensar, analisar e operar</strong> nas empresas — informação → decisão → resultado.
           </p>
-
           <div class="mt-6 flex flex-wrap gap-2">
-            <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10">Inteligência aplicada</span>
-            <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10">Execução com excelência</span>
-            <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10">Personalização</span>
+            <span class="inline-flex items-center gap-1 rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10"><svg class="h-3 w-3 text-violet-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Inteligência aplicada</span>
+            <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10">Execução</span>
             <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10">Transparência</span>
             <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10">Evolução contínua</span>
           </div>
@@ -286,45 +268,68 @@ Como usar:
     <!-- Como fazemos -->
     <section id="como-fazemos" class="border-y border-white/10 bg-base-800/30">
       <div class="mx-auto max-w-6xl px-4 py-16">
-        <div class="max-w-2xl">
-          <h2 class="text-2xl font-semibold tracking-tight">Como fazemos</h2>
-          <p class="mt-4 text-slate-200 leading-relaxed">
-            Todo projeto começa com o <span class="text-slate-50 font-medium">Diagnóstico Inteligente GoLive AI</span>:
-            investigamos processos, dados, marketing, vendas e estratégia para identificar gargalos e oportunidades reais de IA aplicada.
+        <div class="max-w-2xl reveal">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-500/20 text-sky-300">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+          </div>
+          <h2 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">Como fazemos</h2>
+          <p class="mt-4 text-slate-200 leading-relaxed text-lg md:text-xl">
+            Tudo começa com o <strong class="text-slate-50 text-lg">Diagnóstico Inteligente</strong>: mapeamos processos, dados, marketing e estratégia para identificar gargalos e oportunidades de IA.
           </p>
         </div>
 
         <div class="mt-10 grid gap-6 md:grid-cols-3">
-          <div class="glass rounded-3xl p-6">
-            <div class="text-sm font-semibold text-slate-50">1) Discovery</div>
-            <p class="mt-2 text-sm text-slate-200">Entendimento do negócio, objetivos e contexto operacional.</p>
+          <div class="glass card-hover reveal rounded-3xl p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet-500/20 text-lg font-bold text-violet-300">1</span>
+              <div class="text-sm font-semibold text-slate-50">Discovery</div>
+            </div>
+            <p class="mt-3 text-base text-slate-200">Negócio, objetivos e contexto operacional.</p>
           </div>
-          <div class="glass rounded-3xl p-6">
-            <div class="text-sm font-semibold text-slate-50">2) Mapeamento</div>
-            <p class="mt-2 text-sm text-slate-200">Fluxos, sistemas, dados e pontos de fricção no dia a dia.</p>
+          <div class="glass card-hover reveal rounded-3xl p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-500/20 text-lg font-bold text-sky-300">2</span>
+              <div class="text-sm font-semibold text-slate-50">Mapeamento</div>
+            </div>
+            <p class="mt-3 text-base text-slate-200">Fluxos, sistemas, dados e pontos de fricção.</p>
           </div>
-          <div class="glass rounded-3xl p-6">
-            <div class="text-sm font-semibold text-slate-50">3) Oportunidades</div>
-            <p class="mt-2 text-sm text-slate-200">Prioridades práticas com impacto estimado e caminho de implementação.</p>
+          <div class="glass card-hover reveal rounded-3xl p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/20 text-lg font-bold text-cyan-300">3</span>
+              <div class="text-sm font-semibold text-slate-50">Oportunidades</div>
+            </div>
+            <p class="mt-3 text-base text-slate-200">Prioridades com impacto estimado e roadmap.</p>
           </div>
         </div>
 
         <div class="mt-6 grid gap-6 md:grid-cols-4">
-          <div class="glass rounded-3xl p-6">
-            <div class="text-sm font-semibold text-slate-50">4) Prototipação</div>
-            <p class="mt-2 text-sm text-slate-200">MVP rápido para validar, medir e ajustar.</p>
+          <div class="glass card-hover reveal rounded-3xl p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500/20 text-sm font-bold text-amber-300">4</span>
+              <div class="text-sm font-semibold text-slate-50">Prototipação</div>
+            </div>
+            <p class="mt-2 text-base text-slate-200">MVP para validar e ajustar.</p>
           </div>
-          <div class="glass rounded-3xl p-6">
-            <div class="text-sm font-semibold text-slate-50">5) Implementação</div>
-            <p class="mt-2 text-sm text-slate-200">Integrações e soluções em produção, com governança.</p>
+          <div class="glass card-hover reveal rounded-3xl p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-sm font-bold text-emerald-300">5</span>
+              <div class="text-sm font-semibold text-slate-50">Implementação</div>
+            </div>
+            <p class="mt-2 text-base text-slate-200">Soluções em produção com governança.</p>
           </div>
-          <div class="glass rounded-3xl p-6">
-            <div class="text-sm font-semibold text-slate-50">6) Go Live</div>
-            <p class="mt-2 text-sm text-slate-200">Ativação, monitoramento e adoção do time.</p>
+          <div class="glass card-hover reveal rounded-3xl p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-green-500/20 text-sm font-bold text-green-300">6</span>
+              <div class="text-sm font-semibold text-slate-50">Go Live</div>
+            </div>
+            <p class="mt-2 text-base text-slate-200">Ativação, monitoramento e adoção.</p>
           </div>
-          <div class="glass rounded-3xl p-6">
-            <div class="text-sm font-semibold text-slate-50">7) Evolução</div>
-            <p class="mt-2 text-sm text-slate-200">Otimização contínua orientada a dados e performance.</p>
+          <div class="glass card-hover reveal rounded-3xl p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-500/20 text-sm font-bold text-teal-300">7</span>
+              <div class="text-sm font-semibold text-slate-50">Evolução</div>
+            </div>
+            <p class="mt-2 text-base text-slate-200">Otimização contínua com dados.</p>
           </div>
         </div>
       </div>
@@ -332,48 +337,70 @@ Como usar:
 
     <!-- Soluções -->
     <section id="solucoes" class="mx-auto max-w-6xl px-4 py-16">
-      <div class="max-w-2xl">
-        <h2 class="text-2xl font-semibold tracking-tight">Soluções que implementamos</h2>
-        <p class="mt-4 text-slate-200 leading-relaxed">
-          Transformamos análise em ação com soluções práticas: automação inteligente, assistentes com IA, análises de dados e mercado,
-          criação de conteúdo/documentos e integrações entre sistemas já existentes.
+      <div class="max-w-2xl reveal">
+        <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/20 text-cyan-300">
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h2 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">Soluções que implementamos</h2>
+        <p class="mt-4 text-slate-200 leading-relaxed text-lg md:text-xl">
+          Automação inteligente, assistentes com IA, análises de dados e mercado, conteúdo/documentos e integrações entre sistemas.
         </p>
       </div>
 
       <div class="mt-10 grid gap-6 md:grid-cols-2">
-        <div class="glass rounded-3xl p-6">
-          <div class="text-sm font-semibold text-slate-50">Automações inteligentes</div>
-          <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-200">
-            <li>Fluxos operacionais automatizados (e-mail → ticket → CRM/planilha)</li>
-            <li>Triagem e roteamento de demandas (prioridade, setor, urgência)</li>
-            <li>Alertas proativos e validações para reduzir erros</li>
+        <div class="glass card-hover reveal rounded-3xl p-6">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/20 text-violet-300">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            </span>
+            <div class="text-base font-semibold text-slate-50">Automações inteligentes</div>
+          </div>
+          <ul class="mt-4 space-y-2 text-base text-slate-200">
+            <li class="flex gap-2"><span class="text-violet-400">•</span> Fluxos e-mail → ticket → CRM</li>
+            <li class="flex gap-2"><span class="text-violet-400">•</span> Triagem e roteamento de demandas</li>
+            <li class="flex gap-2"><span class="text-violet-400">•</span> Alertas e validações</li>
           </ul>
         </div>
 
-        <div class="glass rounded-3xl p-6">
-          <div class="text-sm font-semibold text-slate-50">Assistentes com IA</div>
-          <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-200">
-            <li>Assistente interno para procedimentos e documentos</li>
-            <li>Atendimento automatizado ao cliente (com handoff para humano)</li>
-            <li>Copiloto estratégico: pesquisa, cenários e segunda opinião</li>
+        <div class="glass card-hover reveal rounded-3xl p-6">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-sky-500/20 text-sky-300">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 2 13.574 2 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </span>
+            <div class="text-base font-semibold text-slate-50">Assistentes com IA</div>
+          </div>
+          <ul class="mt-4 space-y-2 text-base text-slate-200">
+            <li class="flex gap-2"><span class="text-sky-400">•</span> Assistente interno (procedimentos e docs)</li>
+            <li class="flex gap-2"><span class="text-sky-400">•</span> Atendimento ao cliente com handoff humano</li>
+            <li class="flex gap-2"><span class="text-sky-400">•</span> Copiloto estratégico e cenários</li>
           </ul>
         </div>
 
-        <div class="glass rounded-3xl p-6">
-          <div class="text-sm font-semibold text-slate-50">Dados, produto e mercado</div>
-          <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-200">
-            <li>Relatórios automáticos e insights em linguagem natural</li>
-            <li>Detecção de anomalias e oportunidades</li>
-            <li>Análise de produto + comparação com mercado + recomendações</li>
+        <div class="glass card-hover reveal rounded-3xl p-6">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-300">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </span>
+            <div class="text-base font-semibold text-slate-50">Dados, produto e mercado</div>
+          </div>
+          <ul class="mt-4 space-y-2 text-base text-slate-200">
+            <li class="flex gap-2"><span class="text-cyan-400">•</span> Relatórios e insights em linguagem natural</li>
+            <li class="flex gap-2"><span class="text-cyan-400">•</span> Anomalias e oportunidades</li>
+            <li class="flex gap-2"><span class="text-cyan-400">•</span> Análise de produto e mercado</li>
           </ul>
         </div>
 
-        <div class="glass rounded-3xl p-6">
-          <div class="text-sm font-semibold text-slate-50">Documentos, conteúdo e campanhas</div>
-          <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-200">
-            <li>Geração de propostas, relatórios e apresentações</li>
-            <li>Fábrica de conteúdo com IA (variações A/B)</li>
-            <li>Dashboards de marketing com interpretação e recomendações</li>
+        <div class="glass card-hover reveal rounded-3xl p-6">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-300">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </span>
+            <div class="text-base font-semibold text-slate-50">Documentos e conteúdo</div>
+          </div>
+          <ul class="mt-4 space-y-2 text-base text-slate-200">
+            <li class="flex gap-2"><span class="text-emerald-400">•</span> Propostas, relatórios e apresentações</li>
+            <li class="flex gap-2"><span class="text-emerald-400">•</span> Conteúdo com IA e variações A/B</li>
+            <li class="flex gap-2"><span class="text-emerald-400">•</span> Dashboards com interpretação</li>
           </ul>
         </div>
       </div>
@@ -382,64 +409,80 @@ Como usar:
     <!-- Cases -->
     <section id="cases" class="border-t border-white/10 bg-base-800/30">
       <div class="mx-auto max-w-6xl px-4 py-16">
-        <div class="max-w-2xl">
-          <h2 class="text-2xl font-semibold tracking-tight">Aplicações práticas</h2>
-          <p class="mt-4 text-slate-200 leading-relaxed">
-            Abaixo alguns exemplos de como aplicamos IA na prática — sempre integrando às rotinas, sistemas e objetivos do cliente.
+        <div class="max-w-2xl reveal">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/20 text-amber-300">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          </div>
+          <h2 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">Aplicações práticas</h2>
+          <p class="mt-4 text-slate-200 leading-relaxed text-lg md:text-xl">
+            Exemplos de IA integrada às rotinas e objetivos do cliente.
           </p>
         </div>
 
         <div class="mt-10 grid gap-6 md:grid-cols-3">
-          <article class="glass rounded-3xl p-6">
+          <article class="glass card-hover reveal rounded-3xl p-6">
             <div class="flex items-center justify-between">
-              <h3 class="text-sm font-semibold text-slate-50">Advocacia</h3>
+              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-500/20 text-slate-300">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-3 9m6-14a5.002 5.002 0 00-6.001 0M6 7l-3 9"/></svg>
+              </span>
               <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10">Operação</span>
             </div>
-            <ul class="mt-4 list-disc space-y-1 pl-5 text-sm text-slate-200">
-              <li>Leitura e resumo de movimentações e decisões</li>
-              <li>Status automatizado para clientes (WhatsApp/portal)</li>
-              <li>Documentos jurídicos com padronização e rapidez</li>
+            <h3 class="mt-4 text-sm font-semibold text-slate-50">Advocacia</h3>
+            <ul class="mt-3 space-y-2 text-sm text-slate-200">
+              <li class="flex gap-2"><span class="text-slate-400">•</span> Resumo de movimentações e decisões</li>
+              <li class="flex gap-2"><span class="text-slate-400">•</span> Status automatizado (WhatsApp/portal)</li>
+              <li class="flex gap-2"><span class="text-slate-400">•</span> Documentos padronizados</li>
             </ul>
           </article>
 
-          <article class="glass rounded-3xl p-6">
+          <article class="glass card-hover reveal rounded-3xl p-6">
             <div class="flex items-center justify-between">
-              <h3 class="text-sm font-semibold text-slate-50">Marketing</h3>
+              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-pink-500/20 text-pink-300">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+              </span>
               <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10">Crescimento</span>
             </div>
-            <ul class="mt-4 list-disc space-y-1 pl-5 text-sm text-slate-200">
-              <li>Estratégia assistida por IA + pesquisa de mercado</li>
-              <li>Geração de criativos e variações (A/B)</li>
-              <li>Insights automáticos a partir de métricas</li>
+            <h3 class="mt-4 text-sm font-semibold text-slate-50">Marketing</h3>
+            <ul class="mt-3 space-y-2 text-sm text-slate-200">
+              <li class="flex gap-2"><span class="text-slate-400">•</span> Estratégia + pesquisa de mercado</li>
+              <li class="flex gap-2"><span class="text-slate-400">•</span> Criativos e variações A/B</li>
+              <li class="flex gap-2"><span class="text-slate-400">•</span> Insights a partir de métricas</li>
             </ul>
           </article>
 
-          <article class="glass rounded-3xl p-6">
+          <article class="glass card-hover reveal rounded-3xl p-6">
             <div class="flex items-center justify-between">
-              <h3 class="text-sm font-semibold text-slate-50">Varejo</h3>
+              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-500/20 text-indigo-300">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+              </span>
               <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10">Dados</span>
             </div>
-            <ul class="mt-4 list-disc space-y-1 pl-5 text-sm text-slate-200">
-              <li>Análise de vendas, margem, giro e sazonalidade</li>
-              <li>Comparação com mercado e oportunidades</li>
-              <li>Recomendações práticas para alavancar vendas</li>
+            <h3 class="mt-4 text-sm font-semibold text-slate-50">Varejo</h3>
+            <ul class="mt-3 space-y-2 text-sm text-slate-200">
+              <li class="flex gap-2"><span class="text-slate-400">•</span> Vendas, margem, giro e sazonalidade</li>
+              <li class="flex gap-2"><span class="text-slate-400">•</span> Comparação com mercado</li>
+              <li class="flex gap-2"><span class="text-slate-400">•</span> Recomendações para vendas</li>
             </ul>
           </article>
         </div>
 
-        <div class="mt-10 glass rounded-3xl p-6">
+        <div class="mt-10 glass card-hover reveal rounded-3xl p-6">
           <div class="grid gap-6 md:grid-cols-2 md:items-center">
-            <div>
-              <h3 class="text-lg font-semibold text-slate-50">Quer um diagnóstico rápido do seu cenário?</h3>
-              <p class="mt-2 text-sm text-slate-200">
-                Em uma conversa estruturada, mapeamos oportunidades reais onde a IA pode gerar eficiência, clareza e resultado.
-              </p>
+            <div class="flex items-start gap-3">
+              <span class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-300">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </span>
+              <div>
+                <h3 class="text-xl md:text-2xl font-semibold text-slate-50">Diagnóstico rápido do seu cenário</h3>
+                <p class="mt-2 text-base text-slate-200">Em uma conversa, mapeamos onde a IA gera eficiência e resultado.</p>
+              </div>
             </div>
             <div class="flex flex-col gap-3 sm:flex-row md:justify-end">
-              <a href="#contato" class="btn-primary inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-900">
+              <a href="#contato" class="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-slate-900">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 2 13.574 2 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                 Solicitar diagnóstico
               </a>
-              <a href="#solucoes" class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold hover:bg-white/10">
+              <a href="#solucoes" class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold hover:bg-white/10">
                 Ver soluções
               </a>
             </div>
@@ -451,32 +494,53 @@ Como usar:
     <!-- Contato -->
     <section id="contato" class="mx-auto max-w-6xl px-4 py-16">
       <div class="grid gap-10 md:grid-cols-2">
-        <div>
-          <h2 class="text-2xl font-semibold tracking-tight">Contato</h2>
-          <p class="mt-4 text-slate-200 leading-relaxed">
-            Conte rapidamente seu cenário. Retornamos com um direcionamento inicial e, se fizer sentido, agendamos o Diagnóstico Inteligente.
+        <div class="reveal">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/20 text-emerald-300">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <h2 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">Contato</h2>
+          <p class="mt-4 text-slate-200 leading-relaxed text-lg md:text-xl">
+            Conte seu cenário. Retornamos com direcionamento e, se fizer sentido, agendamos o <strong class="text-slate-50">Diagnóstico Inteligente</strong>.
           </p>
 
           <div class="mt-6 space-y-3 text-sm text-slate-200">
-            <div class="glass rounded-2xl p-4">
-              <div class="text-xs text-slate-300">E-mail</div>
-              <div class="mt-1 font-semibold text-slate-50">contato@goliveai.com.br</div>
+            <div class="glass card-hover rounded-2xl p-4 flex items-center gap-4">
+              <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-500/20 text-sky-300">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </span>
+              <div>
+                <div class="text-xs text-slate-300">E-mail</div>
+                <div class="mt-1 font-semibold text-slate-50">contato@goliveai.com.br</div>
+              </div>
             </div>
-            <div class="glass rounded-2xl p-4">
-              <div class="text-xs text-slate-300">WhatsApp</div>
-              <div class="mt-1 font-semibold text-slate-50">(xx) xxxxx-xxxx</div>
+            <div class="glass card-hover rounded-2xl p-4 flex items-center gap-4">
+              <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-500/20 text-green-300">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </span>
+              <div>
+                <div class="text-xs text-slate-300">WhatsApp</div>
+                <div class="mt-1 font-semibold text-slate-50">(xx) xxxxx-xxxx</div>
+              </div>
             </div>
-            <div class="glass rounded-2xl p-4">
-              <div class="text-xs text-slate-300">LinkedIn</div>
-              <div class="mt-1 font-semibold text-slate-50">/company/golive-ai</div>
+            <div class="glass card-hover rounded-2xl p-4 flex items-center gap-4">
+              <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/20 text-blue-300">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </span>
+              <div>
+                <div class="text-xs text-slate-300">LinkedIn</div>
+                <div class="mt-1 font-semibold text-slate-50">/company/golive-ai</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="glass rounded-3xl p-6">
-          <div class="text-sm font-semibold text-slate-50">Enviar mensagem</div>
+        <div class="glass card-hover reveal rounded-3xl p-6">
+          <div class="flex items-center gap-2 text-sm font-semibold text-slate-50">
+            <svg class="h-5 w-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Enviar mensagem
+          </div>
           <p class="mt-2 text-sm text-slate-200">
-            (Versão simples) — abre seu e-mail com as informações preenchidas.
+            Abre seu e-mail com os dados preenchidos.
           </p>
 
           <form class="mt-6 space-y-4" onsubmit="return openMailto(event)">
@@ -520,12 +584,13 @@ Como usar:
               ></textarea>
             </div>
 
-            <button type="submit" class="btn-primary w-full rounded-xl px-5 py-3 text-sm font-semibold text-slate-900">
+            <button type="submit" class="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-slate-900">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
               Enviar
             </button>
 
             <p class="text-xs text-slate-400">
-              Dica: quando vocês evoluírem, dá para trocar este formulário por um endpoint (Formspree / Netlify Forms / backend próprio).
+              Formulário abre seu e-mail. Depois pode trocar por Formspree, Netlify Forms ou backend.
             </p>
           </form>
         </div>
@@ -536,10 +601,13 @@ Como usar:
     <footer class="border-t border-white/10 bg-base-950">
       <div class="mx-auto max-w-6xl px-4 py-10">
         <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div>
-            <div class="text-sm font-semibold text-slate-50">GoLive AI</div>
-            <div class="mt-1 text-xs text-slate-300">Transformando inteligência em resultado</div>
-          </div>
+          <a href="#top" class="flex items-center gap-3">
+            <img src="img/logo.png" alt="GoLive AI" class="h-8 w-auto object-contain opacity-90" />
+            <div>
+              <div class="text-sm font-semibold text-slate-50">GoLive AI</div>
+              <div class="mt-1 text-xs text-slate-300">Inteligência em resultado</div>
+            </div>
+          </a>
 
           <div class="flex flex-wrap gap-3 text-xs text-slate-300">
             <a class="hover:text-white" href="#sobre">Sobre</a>
@@ -551,10 +619,11 @@ Como usar:
         </div>
 
         <div class="mt-8 text-xs text-slate-500">
-          © <span id="year"></span> GoLive AI. Todos os direitos reservados.
+          Â© <span id="year"></span> GoLive AI. Todos os direitos reservados.
         </div>
       </div>
     </footer>
+    </div><!-- fim wrapper z-10 -->
 
     <script>
       // Mobile menu
@@ -564,8 +633,46 @@ Como usar:
         mobileMenu.classList.toggle("hidden");
       });
 
+      // Hero: efeito de surgir em sequência ao carregar a página (logo → texto → botões)
+      (function initHeroBuild() {
+        var hero = document.getElementById("hero-content");
+        if (!hero) return;
+        var builds = hero.querySelectorAll(".build");
+        var delay = 250;
+        builds.forEach(function(el, i) {
+          setTimeout(function() {
+            el.classList.add("built");
+          }, 350 + i * delay);
+        });
+      })();
+
+      // Resto da página: elementos surgem ao rolar (IntersectionObserver para .reveal)
+      (function initRevealOnScroll() {
+        function observeReveal() {
+          var revealEls = document.querySelectorAll(".reveal");
+          if (revealEls.length === 0) return;
+          var observer = new IntersectionObserver(
+            function(entries) {
+              entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("visible");
+                }
+              });
+            },
+            { rootMargin: "0px 0px -120px 0px", threshold: 0.12 }
+          );
+          revealEls.forEach(function(el) { observer.observe(el); });
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", observeReveal);
+        } else {
+          observeReveal();
+        }
+      })();
+
       // Year
-      document.getElementById("year").textContent = new Date().getFullYear();
+      var yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
       // Form mailto (simples e gratuito)
       function openMailto(e) {
